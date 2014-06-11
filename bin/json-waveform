@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+require "json-waveform"
+require "optparse"
+
+options = JsonWaveform::DEFAULT_OPTIONS
+optparse = OptionParser.new do |o|
+  o.banner = "Usage: waveform [options] source_audio"
+  o.version = Waveform::VERSION
+
+  o.on("-s", "--samples SAMPLES", "Samples generated from the original file (i.e.: waveform width) -- Default #{Waveform::DefaultOptions[:samples]}.") do |samples|
+    options[:samples] = samples.to_i
+  end
+
+  o.on("-A", "--amplitude AMPLITUDE", "Max amplitude of the waveform values-- Default #{Waveform::DefaultOptions[:amplitude]}.") do |amplitude|
+    options[:amplitude] = amplitude.to_i
+  end
+
+  o.on("-a", "--autosample MSEC", "Sets the width of the waveform based on the audio length, using a resolution of the given msec per sample.") do |msec|
+    options[:auto_sample] = msec.to_i
+  end
+
+  o.on("-m", "--method METHOD", "Wave analyzation method (can be 'peak' or 'rms') -- Default '#{Waveform::DefaultOptions[:method]}'.") do |method|
+    options[:method] = method.to_sym
+  end
+
+  o.on("-h", "--help", "Display this screen") do
+    puts o
+    exit
+  end
+end
+
+optparse.parse!
+
+begin
+  result = Waveform.generate(ARGV[0], options)
+  puts result
+rescue Waveform::ArgumentError => e
+  puts e.message + "\n\n"
+  puts optparse
+rescue Waveform::RuntimeError => e
+  puts e.message
+end
+
