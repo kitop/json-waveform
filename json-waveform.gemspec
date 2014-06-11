@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     "bin/*"
   ]
 
-  s.executables "json-waveform"
+  s.executables << "json-waveform"
 
   s.add_dependency "ruby-audio"
 end
