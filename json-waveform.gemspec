@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version           = JsonWaveform::VERSION
   s.summary           = "Generate waveform JSON files from audio files"
   s.description       = "Generate waveform JSON information from audio files, compatible with http://waveformjs.org/."
-  s.authors           = ["Esteban pastorino"]
+  s.authors           = ["Esteban Pastorino"]
   s.email             = ["ejpastorino@gmail.com"]
   s.homepage          = "http://github.com/kitop/json-waveform"
 
