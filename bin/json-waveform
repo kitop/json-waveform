@@ -4,14 +4,14 @@ require "optparse"
 
 options = JsonWaveform::DEFAULT_OPTIONS
 optparse = OptionParser.new do |o|
-  o.banner = "Usage: waveform [options] source_audio"
-  o.version = Waveform::VERSION
+  o.banner = "Usage: json-waveform [options] source_audio"
+  o.version = JsonWaveform::VERSION
 
-  o.on("-s", "--samples SAMPLES", "Samples generated from the original file (i.e.: waveform width) -- Default #{Waveform::DefaultOptions[:samples]}.") do |samples|
+  o.on("-s", "--samples SAMPLES", "Samples generated from the original file (i.e.: waveform width) -- Default #{JsonWaveform::DefaultOptions[:samples]}.") do |samples|
     options[:samples] = samples.to_i
   end
 
-  o.on("-A", "--amplitude AMPLITUDE", "Max amplitude of the waveform values-- Default #{Waveform::DefaultOptions[:amplitude]}.") do |amplitude|
+  o.on("-A", "--amplitude AMPLITUDE", "Max amplitude of the waveform values-- Default #{JsonWaveform::DefaultOptions[:amplitude]}.") do |amplitude|
     options[:amplitude] = amplitude.to_i
   end
 
@@ -19,7 +19,7 @@ optparse = OptionParser.new do |o|
     options[:auto_sample] = msec.to_i
   end
 
-  o.on("-m", "--method METHOD", "Wave analyzation method (can be 'peak' or 'rms') -- Default '#{Waveform::DefaultOptions[:method]}'.") do |method|
+  o.on("-m", "--method METHOD", "Wave analyzation method (can be 'peak' or 'rms') -- Default '#{JsonWaveform::DefaultOptions[:method]}'.") do |method|
     options[:method] = method.to_sym
   end
 
@@ -32,12 +32,12 @@ end
 optparse.parse!
 
 begin
-  result = Waveform.generate(ARGV[0], options)
+  result = JsonWaveform.generate(ARGV[0], options)
   puts result
-rescue Waveform::ArgumentError => e
+rescue JsonWaveform::ArgumentError => e
   puts e.message + "\n\n"
   puts optparse
-rescue Waveform::RuntimeError => e
+rescue JsonWaveform::RuntimeError => e
   puts e.message
 end
 
