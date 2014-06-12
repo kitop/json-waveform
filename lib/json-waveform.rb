@@ -29,7 +29,9 @@ class JsonWaveform
     #     Can be :rms or :peak
     #     Default is :peak.
     #
-    #   :samples => The amount of samples wanted
+    #   :samples => The amount of samples wanted. The may have ±10% of the
+    #     samples requested.
+    #
     #     Default is 1800.
     #
     #   :amplitude => The amplitude of the final values

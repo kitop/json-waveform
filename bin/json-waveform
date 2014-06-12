@@ -8,7 +8,7 @@ optparse = OptionParser.new do |o|
   o.banner = "Usage: json-waveform [options] source_audio [output]"
   o.version = JsonWaveform::VERSION
 
-  o.on("-s", "--samples SAMPLES", "Samples generated from the original file (i.e.: waveform width) -- Default #{JsonWaveform::DEFAULT_OPTIONS[:samples]}.") do |samples|
+  o.on("-s", "--samples SAMPLES", "Samples generated from the original file (i.e.: waveform width). The result may have ±10% of the samples requested. -- Default #{JsonWaveform::DEFAULT_OPTIONS[:samples]}.") do |samples|
     options[:samples] = samples.to_i
   end
 
