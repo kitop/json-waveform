@@ -1,11 +1,16 @@
 #!/usr/bin/env ruby
 require "json-waveform"
+require "json"
 require "optparse"
 
 options = JsonWaveform::DEFAULT_OPTIONS
 optparse = OptionParser.new do |o|
   o.banner = "Usage: json-waveform [options] source_audio"
   o.version = JsonWaveform::VERSION
+
+  o.on("-o", "--output FILE", "File where to write the JSON -- Default is stdout.") do |output|
+    options[:output] = output
+  end
 
   o.on("-s", "--samples SAMPLES", "Samples generated from the original file (i.e.: waveform width) -- Default #{JsonWaveform::DEFAULT_OPTIONS[:samples]}.") do |samples|
     options[:samples] = samples.to_i
@@ -32,8 +37,14 @@ end
 optparse.parse!
 
 begin
-  result = JsonWaveform.generate(ARGV[0], options)
-  puts result
+  result = JSON.dump(JsonWaveform.generate(ARGV[0], options))
+  if options[:output]
+    File.open(options[:output], 'w') do |file|
+      file.write result
+    end
+  else
+    puts result
+  end
 rescue JsonWaveform::ArgumentError => e
   puts e.message + "\n\n"
   puts optparse
