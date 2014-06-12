@@ -57,8 +57,6 @@ The gem version, *not* the old outdated library listed on RAA. `ruby-audio` is a
 Tests
 =====
 
-**They are not there yet, but will be run using: **
-
     $ make
 
 Sample sound file used in tests is in the Public Domain from soundbible.com: <http://soundbible.com/1598-Electronic-Chime.html>.
