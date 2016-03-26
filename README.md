@@ -43,7 +43,7 @@ Usage in code
 The CLI is really just a thin wrapper around the JsonWaveform class, which you can also use in your programs for reasons I haven't thought of. The JsonWaveform class takes pretty much the same options as the CLI when generating waveforms.
 
 ```ruby
-JsonWaveform("foo.wav", samples: 1000) # => [ 0, 0.1, 0.15, ... ]
+JsonWaveform.generate("foo.wav", samples: 1000) # => [ 0, 0.1, 0.15, ... ]
 ```
 
 Requirements
